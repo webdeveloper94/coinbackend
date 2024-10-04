@@ -68,14 +68,48 @@ class CoinController extends Controller
 
     public function savecoin(Request $request){
        
-        $request->validate([
-            'user_id' => 'required|integer',
-            'total' => 'required|integer',
-        ]);
+        // $request->validate([
+        //     'user_id' => 'required|integer',
+        //     'total' => 'required|integer',
+        // ]);
 
         
-        dd($request->all());
+        // dd($request->all());
+
+
+
+        // CSRF tokenni tekshirish
+        $request->validate([
+            '_token' => 'required',
+            'total' => 'required|integer',
+            'user_id' => 'required|exists:users,id', // Foydalanuvchi ID mavjudligini tekshirish
+        ]);
+
+        // Foydalanuvchi ma'lumotlarini olish
+
+        // Sovrin miqdori
+        $total = $request->input('total');
+        $user_id = $request->input('user_id');
+
+        // Foydalanuvchining mavjud tangalarini olish
+        $coins = Coin::where('user_id', $user_id)->first();
+
+        if ($coins) {
+            // Agar foydalanuvchida tanga bor bo'lsa, yangi tangalarni qo'shamiz
+            $coins->total += $total;
+            $coins->save();
+        } else {
+            // Agar foydalanuvchida tangalar mavjud bo'lmasa, yangi yozuv yaratamiz
+            Coin::create([
+                'user_id' => $user_id,
+                'total' => $total,
+            ]);
+        }
+
+        // Sovrinni muvaffaqiyatli yangilash haqida javob yuborish
+        return redirect()->back()->with('success', 'Tangalar yangilandi!');
+    }
 
         
     }
-}
+

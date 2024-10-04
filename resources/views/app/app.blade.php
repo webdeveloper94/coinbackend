@@ -23,14 +23,11 @@
     <center> <div class="main-content">
         <div class="cats-ba blance">
             <h1 >
-                <form id="coinForm" action="{{ route('savecoin') }}" method="post">
-                    @csrf
-                    <input type="hidden" name="user_id" value="1">
+               
                     @foreach ($coins as $coin)
-                    <input class="totalnumber" type="number" id="total" value="{{ $coin->total }}" name="total" readonly  />
+                    {{ $coin->total }}
                     @endforeach
-                    <input class="hidden-submit" type="submit" value="ok">
-                </form>
+                    
             </h1>
             <div class="stats">
                 <div>Mukofotlar<br>+2.2k</div>
@@ -68,10 +65,10 @@
             <div class="modal-content">
               <p id="modalText">Sovrin: 0 tanga</p>
               <!-- Sovrin yuborish uchun forma -->
-              <form id="coinForm" action="{{ route('/update-coins') }}" method="POST">
+              <form id="coinForm" action="{{ route('savecoin') }}" method="POST">
                 @csrf
                 <input type="hidden" name="total" id="coins" value="">
-                <input type="hidden" name="user_id" value="2">
+                <input type="hidden" name="user_id" value="1">
                 <button type="submit" id="closeModal">OK</button>
               </form>
             </div>
