@@ -9,7 +9,7 @@ Route::get('/', function () {
 });
 
 
-Route::post('/coin', [CoinController::class, 'saveCoin'])->name('savecoin');
+Route::post('/coin', [CoinController::class, 'savecoin'])->name('update-coins');
 
 Route::get('/show/{user_id}', [AppController::class, 'show'])->name('show_user');
 

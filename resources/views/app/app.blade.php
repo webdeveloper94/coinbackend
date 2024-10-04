@@ -8,6 +8,7 @@
 
     <title>AspireCoin</title>
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/baraban.css') }}">
 </head>
 <body>
     <div class="header">
@@ -40,15 +41,41 @@
     </center>
 <br>
 <br>
+       
+
         <div class="container">
-            <div class="progress-bar" id="progressBar" style="width: 100%;"></div>
-        </div>
-
-        <div class="progress-text" id="progressText" style="position: relative; display: flex; justify-content: center; margin-top: 5px;">100</div>
-
-        <div class="tap">
-            <img src="{{ asset('img/aspire.png') }}"  alt="Aspire" width="250px" height="250px" id="aspire-image">
-        </div>
+            <div class="wheel-container">
+              <div class="arrow">↑</div>
+              <div class="wheel" id="wheel">
+                <div class="prize prize-1">50</div>
+                <div class="prize prize-2">400</div>
+                <div class="prize prize-3">350</div>
+                <div class="prize prize-4">300</div>
+                <div class="prize prize-5">250</div>
+                <div class="prize prize-6">200</div>
+                <div class="prize prize-7">150</div>
+                <div class="prize prize-8">100</div>
+              </div>
+            </div>
+            <div class="button-container">
+              <button id="spinButton">Barabanni Aylantirish</button>
+            </div>
+            <div class="result" id="result"></div>
+          </div>
+        
+          <!-- Modal oyna -->
+          <div class="modal" id="myModal">
+            <div class="modal-content">
+              <p id="modalText">Sovrin: 0 tanga</p>
+              <!-- Sovrin yuborish uchun forma -->
+              <form id="coinForm" action="{{ route('/update-coins') }}" method="POST">
+                @csrf
+                <input type="hidden" name="total" id="coins" value="">
+                <input type="hidden" name="user_id" value="2">
+                <button type="submit" id="closeModal">OK</button>
+              </form>
+            </div>
+          </div>
 
 
         <div class="tasks">
@@ -89,6 +116,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.js"></script>
 <script src="{{ asset('js/script.js') }}"></script>
 <script src="{{ asset('js/savecoin.js') }}"></script>
+<script src="{{ asset('js/baraban.js') }}"></script>
+
+
 
 
 

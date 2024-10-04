@@ -66,31 +66,15 @@ class CoinController extends Controller
     }
 
 
-    public function saveCoin(Request $request){
+    public function savecoin(Request $request){
        
         $request->validate([
             'user_id' => 'required|integer',
             'total' => 'required|integer',
         ]);
 
-        // Foydalanuvchi ma'lumotlarini topish
-        $coin = Coin::where('user_id', $request->input('user_id'))->first();
-
-        if ($coin) {
-            // Agar ma'lumot mavjud bo'lsa, totalni yangilang
-            $coin->total = $request->input('total');
-            $coin->save();
-        } else {
-            // Agar ma'lumot yo'q bo'lsa, yangi yozuv qo'shish
-            Coin::create([
-                'user_id' => $request->input('user_id'),
-                'total' => $request->input('total'),
-            ]);
-        }
-
-        //return response()->json(['message' => 'Ma\'lumot muvaffaqiyatli saqlandi.']);
-        return redirect()->route('show_user', ['user_id' => $request->user_id]);
-        //dd($request->all());
+        
+        dd($request->all());
 
         
     }
